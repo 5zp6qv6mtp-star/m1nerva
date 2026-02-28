@@ -70,6 +70,7 @@
 </footer>
 <script src="js/xregexp-all.js"></script>
 <script type="text/javascript" src="js/search.js"></script>
+<script src="js/minerva-config.js"></script>
 <script>
 (function () {
   function getPath() {
@@ -92,6 +93,16 @@
   }
   function uploadKey(path) {
     return "minerva_upload_items::" + path;
+  }
+  var cloudUrl = (window.MINERVA_SUPABASE_URL || "").replace(/\/$/, "");
+  var cloudKey = window.MINERVA_SUPABASE_ANON_KEY || "";
+  function cloudEnabled() {
+    return !!cloudUrl && !!cloudKey;
+  }
+  function cloudHeaders(extra) {
+    var h = { "apikey": cloudKey, "Authorization": "Bearer " + cloudKey };
+    if (extra) { for (var k in extra) h[k] = extra[k]; }
+    return h;
   }
 
   function readDirs(path) {
@@ -118,6 +129,46 @@
   }
   function saveUploads(path, items) {
     localStorage.setItem(uploadKey(path), JSON.stringify(items));
+  }
+  async function syncUploadsFromCloud(path) {
+    if (!cloudEnabled()) return;
+    try {
+      var url = cloudUrl + "/rest/v1/links?select=name,direct_url,notes,size,date,created_at&section=eq." + encodeURIComponent(path) + "&order=created_at.asc";
+      var resp = await fetch(url, { headers: cloudHeaders() });
+      if (!resp.ok) return;
+      var rows = await resp.json();
+      var mapped = rows.map(function (r) {
+        return {
+          name: r.name || "Untitled",
+          direct_url: r.direct_url || "",
+          notes: r.notes || "",
+          size: r.size || "-",
+          date: r.date || "Custom"
+        };
+      });
+      saveUploads(path, mapped);
+      render();
+    } catch (e) {}
+  }
+  async function pushUploadsToCloud(path, items) {
+    if (!cloudEnabled() || !items || items.length === 0) return;
+    try {
+      var payload = items.map(function (i) {
+        return {
+          section: path,
+          name: i.name || "Untitled",
+          direct_url: i.direct_url || "",
+          notes: i.notes || "",
+          size: i.size || "-",
+          date: i.date || "Custom"
+        };
+      });
+      await fetch(cloudUrl + "/rest/v1/links", {
+        method: "POST",
+        headers: cloudHeaders({ "Content-Type": "application/json", "Prefer": "return=minimal" }),
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
   }
 
   function safeName(v) {
@@ -212,37 +263,38 @@
         size = filesInput.files.length + " file(s)";
       }
       var uploads = readUploads(path);
+      var newItems = [];
       var added = false;
       if (bulkUrls.length > 0) {
         bulkUrls.forEach(function (u) {
-          uploads.push({
-            name: nameFromUrl(u),
-            direct_url: u,
-            notes: notes,
-            size: "-",
-            date: "Custom"
-          });
+          var item = { name: nameFromUrl(u), direct_url: u, notes: notes, size: "-", date: "Custom" };
+          uploads.push(item);
+          newItems.push(item);
         });
         added = true;
       }
       if (name || directUrl || (filesInput && filesInput.files && filesInput.files.length > 0)) {
-        uploads.push({
+        var one = {
           name: name || (directUrl ? nameFromUrl(directUrl) : "Untitled"),
           direct_url: directUrl,
           notes: notes,
           size: size,
           date: "Custom"
-        });
+        };
+        uploads.push(one);
+        newItems.push(one);
         added = true;
       }
       if (!added) return;
       saveUploads(path, uploads);
       uploadForm.reset();
       render();
+      pushUploadsToCloud(path, newItems).then(function () { syncUploadsFromCloud(path); });
     });
   }
 
   render();
+  syncUploadsFromCloud(path);
 })();
 </script>
 </body></html>

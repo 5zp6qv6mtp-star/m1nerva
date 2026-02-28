@@ -70,6 +70,7 @@
 <div id="minerva-page-meta" data-section="/files/TOSEC-PIX/Apple/" data-prefix="../../" style="display:none;"></div>
 <script src="../../js/xregexp-all.js"></script>
 <script type="text/javascript" src="../../js/search.js"></script>
+<script src="../../js/minerva-config.js"></script>
 <script>
 (function () {
   var meta = document.getElementById("minerva-page-meta");
@@ -91,6 +92,17 @@
   }
   var key = "minerva_custom_dirs::" + section;
   var uploadKey = "minerva_upload_items::" + section;
+  var seedUploads = [];
+  var cloudUrl = (window.MINERVA_SUPABASE_URL || "").replace(/\/$/, "");
+  var cloudKey = window.MINERVA_SUPABASE_ANON_KEY || "";
+  function cloudEnabled() {
+    return !!cloudUrl && !!cloudKey;
+  }
+  function cloudHeaders(extra) {
+    var h = { "apikey": cloudKey, "Authorization": "Bearer " + cloudKey };
+    if (extra) { for (var k in extra) h[k] = extra[k]; }
+    return h;
+  }
   function readDirs() {
     try {
       var raw = localStorage.getItem(key);
@@ -114,6 +126,64 @@
   }
   function saveUploads(items) {
     localStorage.setItem(uploadKey, JSON.stringify(items));
+  }
+  async function loadSeedUploads() {
+    try {
+      var resp = await fetch(prefix + "data/seed-links.json", { cache: "no-store" });
+      if (!resp.ok) return;
+      var rows = await resp.json();
+      if (!Array.isArray(rows)) return;
+      seedUploads = rows.filter(function (r) { return r && r.section === section; }).map(function (r) {
+        return {
+          name: r.name || "Untitled",
+          direct_url: r.direct_url || "",
+          notes: r.notes || "",
+          size: r.size || "-",
+          date: r.date || "Seed"
+        };
+      });
+      render();
+    } catch (e) {}
+  }
+  async function syncUploadsFromCloud() {
+    if (!cloudEnabled()) return;
+    try {
+      var url = cloudUrl + "/rest/v1/links?select=name,direct_url,notes,size,date,created_at&section=eq." + encodeURIComponent(section) + "&order=created_at.asc";
+      var resp = await fetch(url, { headers: cloudHeaders() });
+      if (!resp.ok) return;
+      var rows = await resp.json();
+      var mapped = rows.map(function (r) {
+        return {
+          name: r.name || "Untitled",
+          direct_url: r.direct_url || "",
+          notes: r.notes || "",
+          size: r.size || "-",
+          date: r.date || "Custom"
+        };
+      });
+      saveUploads(mapped);
+      render();
+    } catch (e) {}
+  }
+  async function pushUploadsToCloud(items) {
+    if (!cloudEnabled() || !items || items.length === 0) return;
+    try {
+      var payload = items.map(function (i) {
+        return {
+          section: section,
+          name: i.name || "Untitled",
+          direct_url: i.direct_url || "",
+          notes: i.notes || "",
+          size: i.size || "-",
+          date: i.date || "Custom"
+        };
+      });
+      await fetch(cloudUrl + "/rest/v1/links", {
+        method: "POST",
+        headers: cloudHeaders({ "Content-Type": "application/json", "Prefer": "return=minimal" }),
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
   }
   function safeName(v) {
     return v.trim().replace(/[\\/]+/g, "").replace(/[<>:\"|?*]/g, "");
@@ -152,7 +222,8 @@
       tr.appendChild(tdDate);
       tbody.appendChild(tr);
     });
-    var uploads = readUploads();
+    var uploads = seedUploads.concat(readUploads());
+    var newItems = [];
     uploads.forEach(function (item) {
       var tr = document.createElement("tr");
       tr.className = "custom-upload-row";
@@ -212,32 +283,33 @@
     var added = false;
     if (bulkUrls.length > 0) {
       bulkUrls.forEach(function (u) {
-        uploads.push({
-          name: nameFromUrl(u),
-          direct_url: u,
-          notes: notes,
-          size: "-",
-          date: "Custom"
-        });
+        var item = { name: nameFromUrl(u), direct_url: u, notes: notes, size: "-", date: "Custom" };
+        uploads.push(item);
+        newItems.push(item);
       });
       added = true;
     }
     if (name || directUrl || (filesInput && filesInput.files && filesInput.files.length > 0)) {
-      uploads.push({
+      var one = {
         name: name || (directUrl ? nameFromUrl(directUrl) : "Untitled"),
         direct_url: directUrl,
         notes: notes,
         size: size,
         date: "Custom"
-      });
+      };
+      uploads.push(one);
+      newItems.push(one);
       added = true;
     }
     if (!added) return;
     saveUploads(uploads);
     uploadForm.reset();
     render();
+    pushUploadsToCloud(newItems).then(syncUploadsFromCloud);
   });
   render();
+  loadSeedUploads();
+  syncUploadsFromCloud();
 })();
 </script>
 </body></html>
