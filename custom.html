@@ -141,10 +141,7 @@
     try {
       var url = cloudUrl + "/rest/v1/links?select=name,direct_url,notes,size,date,created_at&section=eq." + encodeURIComponent(path) + "&order=created_at.asc";
       var resp = await fetch(url, { headers: cloudHeaders() });
-      if (!resp.ok) {
-        if (uploadStatus) uploadStatus.textContent = "Cloud read failed (" + resp.status + "). Showing local items.";
-        return;
-      }
+      if (!resp.ok) return;
       var rows = await resp.json();
       var mapped = rows.map(function (r) {
         return {
