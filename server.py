@@ -35,6 +35,17 @@ def init_db():
             )
             """
         )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS directories (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                parent_section TEXT NOT NULL,
+                name TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                UNIQUE(parent_section, name)
+            )
+            """
+        )
         conn.commit()
 
 
@@ -65,12 +76,16 @@ class MinervaHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         if parsed.path == "/rest/v1/links" or parsed.path == "/api/links":
             return self._get_links(parsed)
+        if parsed.path == "/rest/v1/directories" or parsed.path == "/api/directories":
+            return self._get_directories(parsed)
         return super().do_GET()
 
     def do_POST(self):
         parsed = urlparse(self.path)
         if parsed.path == "/rest/v1/links" or parsed.path == "/api/links":
             return self._post_links(parsed)
+        if parsed.path == "/rest/v1/directories" or parsed.path == "/api/directories":
+            return self._post_directories(parsed)
         self._send_json(404, {"error": "not_found"})
 
     def _get_links(self, parsed):
@@ -159,6 +174,78 @@ class MinervaHandler(SimpleHTTPRequestHandler):
                         "created_at": now,
                     }
                 )
+            conn.commit()
+
+        self._send_json(201, inserted)
+
+    def _get_directories(self, parsed):
+        qs = parse_qs(parsed.query)
+        parent = None
+        if "parent_section" in qs and qs["parent_section"]:
+            raw = qs["parent_section"][0]
+            if raw.startswith("eq."):
+                parent = unquote(raw[3:])
+            else:
+                parent = unquote(raw)
+
+        sql = "SELECT id, parent_section, name, created_at FROM directories"
+        params = []
+        if parent is not None:
+            sql += " WHERE parent_section = ?"
+            params.append(parent)
+        sql += " ORDER BY name ASC"
+
+        with db_conn() as conn:
+            rows = [dict(r) for r in conn.execute(sql, params).fetchall()]
+
+        self._send_json(200, rows)
+
+    def _post_directories(self, parsed):
+        length = int(self.headers.get("Content-Length", "0"))
+        raw = self.rfile.read(length) if length > 0 else b"[]"
+
+        try:
+            payload = json.loads(raw.decode("utf-8"))
+        except Exception:
+            return self._send_json(400, {"error": "invalid_json"})
+
+        if isinstance(payload, dict):
+            payload = [payload]
+        if not isinstance(payload, list):
+            return self._send_json(400, {"error": "payload_must_be_array"})
+
+        now = datetime.now(timezone.utc).isoformat()
+        inserted = []
+
+        with db_conn() as conn:
+            for item in payload:
+                if not isinstance(item, dict):
+                    continue
+                parent_section = str(item.get("parent_section", "")).strip() or "/files/"
+                name = str(item.get("name", "")).strip()
+                # Keep names filesystem-like and safe.
+                name = name.replace("/", "").replace("\\", "")
+                for ch in '<>:"|?*':
+                    name = name.replace(ch, "")
+                if not name:
+                    continue
+                conn.execute(
+                    """
+                    INSERT OR IGNORE INTO directories (parent_section, name, created_at)
+                    VALUES (?, ?, ?)
+                    """,
+                    (parent_section, name, now),
+                )
+                row = conn.execute(
+                    """
+                    SELECT id, parent_section, name, created_at
+                    FROM directories
+                    WHERE parent_section = ? AND name = ?
+                    """,
+                    (parent_section, name),
+                ).fetchone()
+                if row:
+                    inserted.append(dict(row))
             conn.commit()
 
         self._send_json(201, inserted)
