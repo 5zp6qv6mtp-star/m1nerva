@@ -82,13 +82,13 @@ while IFS= read -r path; do
     echo '</div>'
     echo '<div class="upload-panel" style="display:none; max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">'
     printf '<p style="margin: 0 0 8px 0; color: #39FF14;">Upload to this section: /files/%s/</p>\n' "$(printf '%s' "$decoded_path" | html_escape)"
-    echo '<form class="upload-form" action="/upload/" method="post" enctype="multipart/form-data">'
+    echo '<form class="upload-form" action="/upload/" method="post" enctype="multipart/form-data" novalidate>'
     printf '<input type="hidden" name="section" value="/files/%s/">\n' "$(printf '%s' "$decoded_path" | html_escape)"
     echo '<p style="margin: 0 0 8px 0;">'
     echo '<label>Name: <input type="text" name="name" style="width: 320px;"></label>'
     echo '</p>'
     echo '<p style="margin: 0 0 8px 0;">'
-    echo '<label>Direct Download URL: <input type="url" name="direct_url" placeholder="https://example.com/file.zip" style="width: 520px;"></label>'
+    echo '<label>Direct Download URL: <input type="text" name="direct_url" placeholder="https://example.com/file.zip" style="width: 520px;"></label>'
     echo '</p>'
     echo '<p style="margin: 0 0 8px 0;">'
     echo '<label>Bulk Direct URLs (one per line)</label><br>'

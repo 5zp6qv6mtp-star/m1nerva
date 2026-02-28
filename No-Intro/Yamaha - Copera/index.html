@@ -29,13 +29,13 @@
 </div>
 <div class="upload-panel" style="display:none; max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">
 <p style="margin: 0 0 8px 0; color: #39FF14;">Upload to this section: /files/No-Intro/Yamaha - Copera/</p>
-<form class="upload-form" action="/upload/" method="post" enctype="multipart/form-data">
+<form class="upload-form" action="/upload/" method="post" enctype="multipart/form-data" novalidate>
 <input type="hidden" name="section" value="/files/No-Intro/Yamaha - Copera/">
 <p style="margin: 0 0 8px 0;">
 <label>Name: <input type="text" name="name" style="width: 320px;"></label>
 </p>
 <p style="margin: 0 0 8px 0;">
-<label>Direct Download URL: <input type="url" name="direct_url" placeholder="https://example.com/file.zip" style="width: 520px;"></label>
+<label>Direct Download URL: <input type="text" name="direct_url" placeholder="https://example.com/file.zip" style="width: 520px;"></label>
 </p>
 <p style="margin: 0 0 8px 0;">
 <label>Bulk Direct URLs (one per line)</label><br>
