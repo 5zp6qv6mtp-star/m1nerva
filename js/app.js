@@ -9,6 +9,7 @@
     uploadStatus: document.querySelector('.upload-status'),
     newDirForm: document.querySelector('.newdir-form'),
     newDirInput: document.querySelector('.newdir-input'),
+    searchForm: document.getElementById('search-form'),
     searchInput: document.getElementById('search-input'),
     dirBody: document.getElementById('dir-body'),
     pathTitle: document.getElementById('path-title'),
@@ -282,8 +283,9 @@
       render();
     });
 
-    if (refs.searchInput) {
-      refs.searchInput.addEventListener('input', function () {
+    if (refs.searchForm && refs.searchInput) {
+      refs.searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
         state.searchTerm = refs.searchInput.value || '';
         render();
       });

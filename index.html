@@ -62,7 +62,10 @@
 <div>
 <h1 id="path-title">Index of <br>/files/</h1>
 <div style="max-width: 900px; margin: 0 auto 10px auto;">
-<input id="search-input" type="text" placeholder="Search this section..." style="width: 100%; box-sizing: border-box; padding: 8px; background: #111; border: 1px solid #39FF14; color: #fff;">
+<form id="search-form" style="display: flex; gap: 8px;">
+<input id="search-input" type="text" placeholder="Search this section..." style="flex: 1; box-sizing: border-box; padding: 8px; background: #111; border: 1px solid #39FF14; color: #fff;">
+<button id="search-button" type="submit">Search</button>
+</form>
 </div>
 <table id="list"><thead><tr><th style="width:55%">File Name</th><th style="width:20%">File Size</th><th style="width:25%">Date</th></tr></thead>
 <tbody id="dir-body"></tbody></table></div>
