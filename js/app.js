@@ -9,6 +9,7 @@
     uploadStatus: document.querySelector('.upload-status'),
     newDirForm: document.querySelector('.newdir-form'),
     newDirInput: document.querySelector('.newdir-input'),
+    searchInput: document.getElementById('search-input'),
     dirBody: document.getElementById('dir-body'),
     pathTitle: document.getElementById('path-title'),
     uploadTarget: document.getElementById('upload-target'),
@@ -22,7 +23,8 @@
     cloudLinks: [],
     localLinks: [],
     cloudDirs: [],
-    localDirs: []
+    localDirs: [],
+    searchTerm: ''
   };
 
   function headers(extra) {
@@ -194,17 +196,26 @@
 
   function render() {
     var html = '';
+    var q = state.searchTerm.trim().toLowerCase();
+    var matches = function (text) {
+      return !q || (text || '').toLowerCase().indexOf(q) !== -1;
+    };
     var p = parentSection(state.section);
     if (p) html += row('index.html?path=' + encodeURIComponent(p), 'Parent directory/', '-', '-');
     else html += row('index.html', 'Parent directory/', '-', '-');
 
     mergedDirs().forEach(function (name) {
       var child = normalizeSection(state.section + name + '/');
-      html += row('index.html?path=' + encodeURIComponent(child), name + '/', '-', 'Directory');
+      if (matches(name)) {
+        html += row('index.html?path=' + encodeURIComponent(child), name + '/', '-', 'Directory');
+      }
     });
 
     mergedLinks().forEach(function (item) {
-      html += row(item.direct_url || '#', item.name + ' [Upload]', item.size || '-', item.date || 'Custom', !!item.direct_url);
+      var text = (item.name || '') + ' ' + (item.notes || '') + ' ' + (item.direct_url || '');
+      if (matches(text)) {
+        html += row(item.direct_url || '#', item.name + ' [Upload]', item.size || '-', item.date || 'Custom', !!item.direct_url);
+      }
     });
 
     refs.dirBody.innerHTML = html;
@@ -270,6 +281,13 @@
       await loadCloudDirs();
       render();
     });
+
+    if (refs.searchInput) {
+      refs.searchInput.addEventListener('input', function () {
+        state.searchTerm = refs.searchInput.value || '';
+        render();
+      });
+    }
 
     refs.uploadForm.addEventListener('submit', async function (e) {
       e.preventDefault();
