@@ -1,0 +1,243 @@
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>Content Listing | Minerva</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../css/main.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+</head>
+<body>
+<pre style="font: 10px/9px monospace; color: white; text-align: center;"> __  __ ___ _   _ _____ ______     ___    
+|  \/  |_ _| \ | | ____|  _ \ \   / / \   
+| |\/| || ||  \| |  _| | |_) \ \ / / _ \  
+| |  | || || |\  | |___|  _ < \ V / ___ \ 
+|_|  |_|___|_| \_|_____|_| \_\ \_/_/   \_\
+
+</pre>
+<pre style="font: 14px/13px monospace; color: white; text-align: center;">Where sharing is a priority</pre>
+<br>
+<p style="text-align: center; color: #39FF14; font-size: 1.4em;">What comes down must go up.</p>
+<br>
+<div class="row">
+<a href="../../index.html" class="menu">Home</a> | 
+<a href="../../index.html" class="menu">Files</a> | 
+<a href="#" class="menu upload-toggle">Upload</a>
+</div>
+<br>
+<div class="noscriptnotice">
+<noscript>Please enable JavaScript in order to use Minerva search features.</noscript>
+</div>
+<div class="upload-panel" style="display:none; max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">
+<p style="margin: 0 0 8px 0; color: #39FF14;">Upload to this section: /files/No-Intro/Nintendo - amiibo/</p>
+<form class="upload-form" action="/upload/" method="post" enctype="multipart/form-data">
+<input type="hidden" name="section" value="/files/No-Intro/Nintendo - amiibo/">
+<p style="margin: 0 0 8px 0;">
+<label>Name: <input type="text" name="name" style="width: 320px;"></label>
+</p>
+<p style="margin: 0 0 8px 0;">
+<label>Direct Download URL: <input type="url" name="direct_url" placeholder="https://example.com/file.zip" style="width: 520px;"></label>
+</p>
+<p style="margin: 0 0 8px 0;">
+<label>Bulk Direct URLs (one per line)</label><br>
+<textarea name="bulk_urls" rows="5" style="width: 700px;" placeholder="https://example.com/a.zip&#10;https://example.com/b.zip"></textarea>
+</p>
+<p style="margin: 0 0 8px 0;">
+<label>Notes: <input type="text" name="notes" style="width: 520px;"></label>
+</p>
+<p style="margin: 0 0 8px 0;"><input type="file" name="files" multiple></p>
+<button type="submit">Submit</button>
+</form>
+</div>
+<div style="max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">
+<p style="margin: 0 0 8px 0; color: #39FF14;">Create new subdirectory in this section</p>
+<form class="newdir-form">
+<label>Directory Name: <input type="text" class="newdir-input" required style="width: 320px;"></label>
+<button type="submit">Create Directory</button>
+</form>
+</div>
+<div>
+<h1>Index of 
+/files/No-Intro/Nintendo - amiibo/</h1>
+<table id="list"><thead><tr><th style="width:55%">File Name</th><th style="width:20%">File Size</th><th style="width:25%">Date</th></tr></thead>
+<tbody>
+<tr><td class="link"><a href="../index.html">Parent directory/</a></td><td class="size">-</td><td class="date">-</td></tr>
+</tbody></table></div>
+<p style="text-align: center;">Minerva is a Myrient Clone</p>
+<footer>
+<a href="#">Non-Affiliation Disclaimer</a> | 
+<a href="#">DMCA</a>
+</footer>
+<div id="minerva-page-meta" data-section="/files/No-Intro/Nintendo - amiibo/" data-prefix="../../" style="display:none;"></div>
+<script src="../../js/xregexp-all.js"></script>
+<script type="text/javascript" src="../../js/search.js"></script>
+<script>
+(function () {
+  var meta = document.getElementById("minerva-page-meta");
+  if (!meta) return;
+  var section = meta.getAttribute("data-section") || "/files/";
+  var prefix = meta.getAttribute("data-prefix") || "";
+  var tbody = document.querySelector("#list tbody");
+  var uploadToggle = document.querySelector(".upload-toggle");
+  var uploadPanel = document.querySelector(".upload-panel");
+  var uploadForm = document.querySelector(".upload-form");
+  var form = document.querySelector(".newdir-form");
+  var input = document.querySelector(".newdir-input");
+  if (!tbody || !form || !input || !uploadForm) return;
+  if (uploadToggle && uploadPanel) {
+    uploadToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      uploadPanel.style.display = (uploadPanel.style.display === "none" || !uploadPanel.style.display) ? "block" : "none";
+    });
+  }
+  var key = "minerva_custom_dirs::" + section;
+  var uploadKey = "minerva_upload_items::" + section;
+  function readDirs() {
+    try {
+      var raw = localStorage.getItem(key);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveDirs(dirs) {
+    localStorage.setItem(key, JSON.stringify(dirs));
+  }
+  function readUploads() {
+    try {
+      var raw = localStorage.getItem(uploadKey);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveUploads(items) {
+    localStorage.setItem(uploadKey, JSON.stringify(items));
+  }
+  function safeName(v) {
+    return v.trim().replace(/[\\/]+/g, "").replace(/[<>:\"|?*]/g, "");
+  }
+  function nameFromUrl(url) {
+    try {
+      var clean = (url || "").split("#")[0].split("?")[0];
+      var part = clean.substring(clean.lastIndexOf("/") + 1) || "Untitled";
+      return decodeURIComponent(part);
+    } catch (e) {
+      return "Untitled";
+    }
+  }
+  function render() {
+    var old = tbody.querySelectorAll("tr.custom-dir-row, tr.custom-upload-row");
+    old.forEach(function (n) { n.remove(); });
+    var dirs = readDirs();
+    dirs.forEach(function (name) {
+      var tr = document.createElement("tr");
+      tr.className = "custom-dir-row";
+      var tdLink = document.createElement("td");
+      tdLink.className = "link";
+      var a = document.createElement("a");
+      a.href = prefix + "custom.html?path=" + encodeURIComponent(section + name + "/");
+      a.title = name + " (custom)";
+      a.textContent = name + "/";
+      tdLink.appendChild(a);
+      var tdSize = document.createElement("td");
+      tdSize.className = "size";
+      tdSize.textContent = "-";
+      var tdDate = document.createElement("td");
+      tdDate.className = "date";
+      tdDate.textContent = "Custom";
+      tr.appendChild(tdLink);
+      tr.appendChild(tdSize);
+      tr.appendChild(tdDate);
+      tbody.appendChild(tr);
+    });
+    var uploads = readUploads();
+    uploads.forEach(function (item) {
+      var tr = document.createElement("tr");
+      tr.className = "custom-upload-row";
+      var tdLink = document.createElement("td");
+      tdLink.className = "link";
+      var a = document.createElement("a");
+      a.href = item.direct_url || "#";
+      if (item.direct_url) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      a.title = item.notes || item.name || "Upload";
+      a.textContent = (item.name || "Untitled") + " [Upload]";
+      tdLink.appendChild(a);
+      var tdSize = document.createElement("td");
+      tdSize.className = "size";
+      tdSize.textContent = item.size || "-";
+      var tdDate = document.createElement("td");
+      tdDate.className = "date";
+      tdDate.textContent = item.date || "Custom";
+      tr.appendChild(tdLink);
+      tr.appendChild(tdSize);
+      tr.appendChild(tdDate);
+      tbody.appendChild(tr);
+    });
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = safeName(input.value);
+    if (!name) return;
+    var dirs = readDirs();
+    if (dirs.indexOf(name) === -1) {
+      dirs.push(name);
+      dirs.sort();
+      saveDirs(dirs);
+      render();
+    }
+    input.value = "";
+  });
+  uploadForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nameInput = uploadForm.querySelector('input[name="name"]');
+    var urlInput = uploadForm.querySelector('input[name="direct_url"]');
+    var bulkInput = uploadForm.querySelector('textarea[name="bulk_urls"]');
+    var notesInput = uploadForm.querySelector('input[name="notes"]');
+    var filesInput = uploadForm.querySelector('input[name="files"]');
+    var name = nameInput ? nameInput.value.trim() : "";
+    var directUrl = urlInput ? urlInput.value.trim() : "";
+    var bulkText = bulkInput ? bulkInput.value : "";
+    var bulkUrls = bulkText.split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean);
+    var notes = notesInput ? notesInput.value.trim() : "";
+    var size = "-";
+    if (filesInput && filesInput.files && filesInput.files.length > 0) {
+      size = filesInput.files.length + " file(s)";
+    }
+    var uploads = readUploads();
+    var added = false;
+    if (bulkUrls.length > 0) {
+      bulkUrls.forEach(function (u) {
+        uploads.push({
+          name: nameFromUrl(u),
+          direct_url: u,
+          notes: notes,
+          size: "-",
+          date: "Custom"
+        });
+      });
+      added = true;
+    }
+    if (name || directUrl || (filesInput && filesInput.files && filesInput.files.length > 0)) {
+      uploads.push({
+        name: name || (directUrl ? nameFromUrl(directUrl) : "Untitled"),
+        direct_url: directUrl,
+        notes: notes,
+        size: size,
+        date: "Custom"
+      });
+      added = true;
+    }
+    if (!added) return;
+    saveUploads(uploads);
+    uploadForm.reset();
+    render();
+  });
+  render();
+})();
+</script>
+</body></html>

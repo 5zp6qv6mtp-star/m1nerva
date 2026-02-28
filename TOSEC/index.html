@@ -1,0 +1,455 @@
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>Content Listing | Minerva</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/main.css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<body>
+<pre style="font: 10px/9px monospace; color: white; text-align: center;"> __  __ ___ _   _ _____ ______     ___    
+|  \/  |_ _| \ | | ____|  _ \ \   / / \   
+| |\/| || ||  \| |  _| | |_) \ \ / / _ \  
+| |  | || || |\  | |___|  _ < \ V / ___ \ 
+|_|  |_|___|_| \_|_____|_| \_\ \_/_/   \_\
+
+</pre>
+<pre style="font: 14px/13px monospace; color: white; text-align: center;">Where sharing is a priority</pre>
+<br>
+<p style="text-align: center; color: #39FF14; font-size: 1.4em;">What comes down must go up.</p>
+<br>
+<div class="row">
+<a href="../index.html" class="menu">Home</a> | 
+<a href="../index.html" class="menu">Files</a> | 
+<a href="#" class="menu upload-toggle">Upload</a>
+</div>
+<br>
+<div class="noscriptnotice">
+<noscript>Please enable JavaScript in order to use Minerva search features.</noscript>
+</div>
+<div class="upload-panel" style="display:none; max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">
+<p style="margin: 0 0 8px 0; color: #39FF14;">Upload to this section: /files/TOSEC/</p>
+<form class="upload-form" action="/upload/" method="post" enctype="multipart/form-data">
+<input type="hidden" name="section" value="/files/TOSEC/">
+<p style="margin: 0 0 8px 0;">
+<label>Name: <input type="text" name="name" style="width: 320px;"></label>
+</p>
+<p style="margin: 0 0 8px 0;">
+<label>Direct Download URL: <input type="url" name="direct_url" placeholder="https://example.com/file.zip" style="width: 520px;"></label>
+</p>
+<p style="margin: 0 0 8px 0;">
+<label>Bulk Direct URLs (one per line)</label><br>
+<textarea name="bulk_urls" rows="5" style="width: 700px;" placeholder="https://example.com/a.zip&#10;https://example.com/b.zip"></textarea>
+</p>
+<p style="margin: 0 0 8px 0;">
+<label>Notes: <input type="text" name="notes" style="width: 520px;"></label>
+</p>
+<p style="margin: 0 0 8px 0;"><input type="file" name="files" multiple></p>
+<button type="submit">Submit</button>
+</form>
+</div>
+<div style="max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">
+<p style="margin: 0 0 8px 0; color: #39FF14;">Create new subdirectory in this section</p>
+<form class="newdir-form">
+<label>Directory Name: <input type="text" class="newdir-input" required style="width: 320px;"></label>
+<button type="submit">Create Directory</button>
+</form>
+</div>
+<div>
+<h1>Index of 
+/files/TOSEC/</h1>
+<table id="list"><thead><tr><th style="width:55%">File Name</th><th style="width:20%">File Size</th><th style="width:25%">Date</th></tr></thead>
+<tbody>
+<tr><td class="link"><a href="../index.html">Parent directory/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="8-Bit Productions/index.html" title="8-Bit Productions">8-Bit Productions/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="ACT/index.html" title="ACT">ACT/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="AEG/index.html" title="AEG">AEG/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="AMPRO Computers/index.html" title="AMPRO Computers">AMPRO Computers/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="APF/index.html" title="APF">APF/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="AT&amp;T/index.html" title="AT&amp;T">AT&amp;T/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Acorn/index.html" title="Acorn">Acorn/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Advanced Computer Design/index.html" title="Advanced Computer Design">Advanced Computer Design/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="AlphaSmart/index.html" title="AlphaSmart">AlphaSmart/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Alspa Computers/index.html" title="Alspa Computers">Alspa Computers/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Altos Computer Systems/index.html" title="Altos Computer Systems">Altos Computer Systems/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Amstrad/index.html" title="Amstrad">Amstrad/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Analogue/index.html" title="Analogue">Analogue/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Apollo/index.html" title="Apollo">Apollo/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Apple/index.html" title="Apple">Apple/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Applied Technology/index.html" title="Applied Technology">Applied Technology/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Aquaplus/index.html" title="Aquaplus">Aquaplus/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Arduboy/index.html" title="Arduboy">Arduboy/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Atari/index.html" title="Atari">Atari/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="BGR Computers/index.html" title="BGR Computers">BGR Computers/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Bally/index.html" title="Bally">Bally/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Bandai/index.html" title="Bandai">Bandai/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Benesse/index.html" title="Benesse">Benesse/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Bernd Huebler/index.html" title="Bernd Huebler">Bernd Huebler/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Bernd Huebler &amp; Klaus-Peter Evert/index.html" title="Bernd Huebler &amp; Klaus-Peter Evert">Bernd Huebler &amp; Klaus-Peter Evert/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Big Mess o'Wires/index.html" title="Big Mess o'Wires">Big Mess o'Wires/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Birkbeck College/index.html" title="Birkbeck College">Birkbeck College/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Bit Corporation/index.html" title="Bit Corporation">Bit Corporation/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Bondwell/index.html" title="Bondwell">Bondwell/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Brother/index.html" title="Brother">Brother/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Burroughs/index.html" title="Burroughs">Burroughs/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="CCE/index.html" title="CCE">CCE/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="COMX/index.html" title="COMX">COMX/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Cambridge Computer/index.html" title="Cambridge Computer">Cambridge Computer/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Camputers/index.html" title="Camputers">Camputers/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Casio/index.html" title="Casio">Casio/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="CircuitMess/index.html" title="CircuitMess">CircuitMess/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Coleco/index.html" title="Coleco">Coleco/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Commodore/index.html" title="Commodore">Commodore/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Compugraphic/index.html" title="Compugraphic">Compugraphic/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Control Data Corporation/index.html" title="Control Data Corporation">Control Data Corporation/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Convergent Technologies/index.html" title="Convergent Technologies">Convergent Technologies/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Creatronic/index.html" title="Creatronic">Creatronic/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Cromemco/index.html" title="Cromemco">Cromemco/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Cybiko/index.html" title="Cybiko">Cybiko/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="DEC/index.html" title="DEC">DEC/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Data Applications International/index.html" title="Data Applications International">Data Applications International/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Datapoint/index.html" title="Datapoint">Datapoint/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Dick Smith/index.html" title="Dick Smith">Dick Smith/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Didact/index.html" title="Didact">Didact/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Digital Electronics/index.html" title="Digital Electronics">Digital Electronics/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Dragon Data/index.html" title="Dragon Data">Dragon Data/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Dual Systems/index.html" title="Dual Systems">Dual Systems/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Dynabyte/index.html" title="Dynabyte">Dynabyte/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="EACA/index.html" title="EACA">EACA/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="ETL/index.html" title="ETL">ETL/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Electronics Australia/index.html" title="Electronics Australia">Electronics Australia/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Elektronika/index.html" title="Elektronika">Elektronika/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Elektronska Industrija Nis/index.html" title="Elektronska Industrija Nis">Elektronska Industrija Nis/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Emerson/index.html" title="Emerson">Emerson/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Enterprise/index.html" title="Enterprise">Enterprise/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Entex/index.html" title="Entex">Entex/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Epoch/index.html" title="Epoch">Epoch/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Epson/index.html" title="Epson">Epson/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Ericsson/index.html" title="Ericsson">Ericsson/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Exelvision/index.html" title="Exelvision">Exelvision/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Exidy/index.html" title="Exidy">Exidy/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Fairchild/index.html" title="Fairchild">Fairchild/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Fairlight/index.html" title="Fairlight">Fairlight/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Ferguson/index.html" title="Ferguson">Ferguson/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Fidelity/index.html" title="Fidelity">Fidelity/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Flexible Systems/index.html" title="Flexible Systems">Flexible Systems/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Front Fareast/index.html" title="Front Fareast">Front Fareast/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Fuji Photo Film/index.html" title="Fuji Photo Film">Fuji Photo Film/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Fujitsu/index.html" title="Fujitsu">Fujitsu/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Fukutake Publishing/index.html" title="Fukutake Publishing">Fukutake Publishing/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Funtech/index.html" title="Funtech">Funtech/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="GCE/index.html" title="GCE">GCE/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Gakken/index.html" title="Gakken">Gakken/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Galaksija/index.html" title="Galaksija">Galaksija/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Game Park/index.html" title="Game Park">Game Park/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Gamebuino/index.html" title="Gamebuino">Gamebuino/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Gould/index.html" title="Gould">Gould/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Grundy/index.html" title="Grundy">Grundy/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Hanimex/index.html" title="Hanimex">Hanimex/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Hartung/index.html" title="Hartung">Hartung/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Hawthorne Technology/index.html" title="Hawthorne Technology">Hawthorne Technology/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Hector/index.html" title="Hector">Hector/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Hewlett-Packard/index.html" title="Hewlett-Packard">Hewlett-Packard/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Hitachi/index.html" title="Hitachi">Hitachi/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="HomeLab/index.html" title="HomeLab">HomeLab/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="IBM/index.html" title="IBM">IBM/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="IMLAC Corporation/index.html" title="IMLAC Corporation">IMLAC Corporation/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Infocom/index.html" title="Infocom">Infocom/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Intec/index.html" title="Intec">Intec/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Interact/index.html" title="Interact">Interact/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="John L. Weinrich/index.html" title="John L. Weinrich">John L. Weinrich/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Jupiter Cantab/index.html" title="Jupiter Cantab">Jupiter Cantab/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Kaypro/index.html" title="Kaypro">Kaypro/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Keio University/index.html" title="Keio University">Keio University/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Lambda Electronics/index.html" title="Lambda Electronics">Lambda Electronics/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="LeapFrog/index.html" title="LeapFrog">LeapFrog/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Leonardo Miliani/index.html" title="Leonardo Miliani">Leonardo Miliani/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Librascope/index.html" title="Librascope">Librascope/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Luxor/index.html" title="Luxor">Luxor/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="MEGA/index.html" title="MEGA">MEGA/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="MGT/index.html" title="MGT">MGT/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="MITS/index.html" title="MITS">MITS/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="MSX/index.html" title="MSX">MSX/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Magnavox/index.html" title="Magnavox">Magnavox/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Manfred Kramer/index.html" title="Manfred Kramer">Manfred Kramer/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Matra Hachette/index.html" title="Matra Hachette">Matra Hachette/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Matsushita/index.html" title="Matsushita">Matsushita/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Mattel/index.html" title="Mattel">Mattel/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Megatel/index.html" title="Megatel">Megatel/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Memotech/index.html" title="Memotech">Memotech/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Michael J. Bauer/index.html" title="Michael J. Bauer">Michael J. Bauer/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Micro Craft/index.html" title="Micro Craft">Micro Craft/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Microkey/index.html" title="Microkey">Microkey/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Microsoft/index.html" title="Microsoft">Microsoft/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Ministerstvo radiopromy'shlennosti/index.html" title="Ministerstvo radiopromy'shlennosti">Ministerstvo radiopromy'shlennosti/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Mitsubishi/index.html" title="Mitsubishi">Mitsubishi/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Motorola/index.html" title="Motorola">Motorola/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Mr. Isizu/index.html" title="Mr. Isizu">Mr. Isizu/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Multi-format/index.html" title="Multi-format">Multi-format/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="NCR/index.html" title="NCR">NCR/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="NEC/index.html" title="NEC">NEC/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Nascom/index.html" title="Nascom">Nascom/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Nichibutsu/index.html" title="Nichibutsu">Nichibutsu/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Nikko/index.html" title="Nikko">Nikko/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Nintendo/index.html" title="Nintendo">Nintendo/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Nokia/index.html" title="Nokia">Nokia/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="NorthStar/index.html" title="NorthStar">NorthStar/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Nuclear Data/index.html" title="Nuclear Data">Nuclear Data/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="OCC/index.html" title="OCC">OCC/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Oh! MZ/index.html" title="Oh! MZ">Oh! MZ/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Ohio Scientific/index.html" title="Ohio Scientific">Ohio Scientific/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Olimex/index.html" title="Olimex">Olimex/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Olivetti/index.html" title="Olivetti">Olivetti/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="OpenPandora/index.html" title="OpenPandora">OpenPandora/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Otrona/index.html" title="Otrona">Otrona/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="PEL Varazdin/index.html" title="PEL Varazdin">PEL Varazdin/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="PTC/index.html" title="PTC">PTC/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Panic/index.html" title="Panic">Panic/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Patisonic/index.html" title="Patisonic">Patisonic/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Peters Plus/index.html" title="Peters Plus">Peters Plus/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Philips/index.html" title="Philips">Philips/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Pimoroni/index.html" title="Pimoroni">Pimoroni/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Pioneer/index.html" title="Pioneer">Pioneer/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Pokitto Oy/index.html" title="Pokitto Oy">Pokitto Oy/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Pravetz/index.html" title="Pravetz">Pravetz/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Psion/index.html" title="Psion">Psion/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="RCA/index.html" title="RCA">RCA/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="RM/index.html" title="RM">RM/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Radica/index.html" title="Radica">Radica/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Radio-86RK/index.html" title="Radio-86RK">Radio-86RK/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Raytheon/index.html" title="Raytheon">Raytheon/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Regnecentralen/index.html" title="Regnecentralen">Regnecentralen/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Retroleum/index.html" title="Retroleum">Retroleum/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Robotron/index.html" title="Robotron">Robotron/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Rockwell/index.html" title="Rockwell">Rockwell/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Roland/index.html" title="Roland">Roland/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Roman Sokolov/index.html" title="Roman Sokolov">Roman Sokolov/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="SABA/index.html" title="SABA">SABA/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="SME Systems/index.html" title="SME Systems">SME Systems/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="SNK/index.html" title="SNK">SNK/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Samsung/index.html" title="Samsung">Samsung/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Sanyo/index.html" title="Sanyo">Sanyo/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Sega/index.html" title="Sega">Sega/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Sharp/index.html" title="Sharp">Sharp/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Sinclair/index.html" title="Sinclair">Sinclair/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Sony/index.html" title="Sony">Sony/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Sord/index.html" title="Sord">Sord/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Spectravideo/index.html" title="Spectravideo">Spectravideo/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="TRQ/index.html" title="TRQ">TRQ/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tandy Radio Shack/index.html" title="Tandy Radio Shack">Tandy Radio Shack/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tangerine/index.html" title="Tangerine">Tangerine/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tatung/index.html" title="Tatung">Tatung/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Technosys/index.html" title="Technosys">Technosys/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tektronix/index.html" title="Tektronix">Tektronix/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Telcon/index.html" title="Telcon">Telcon/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="TeleNova/index.html" title="TeleNova">TeleNova/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="TeleVideo Systems/index.html" title="TeleVideo Systems">TeleVideo Systems/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Telmac/index.html" title="Telmac">Telmac/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Terak/index.html" title="Terak">Terak/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tesla/index.html" title="Tesla">Tesla/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Texas Instruments/index.html" title="Texas Instruments">Texas Instruments/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="The Byte Attic/index.html" title="The Byte Attic">The Byte Attic/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Thomson/index.html" title="Thomson">Thomson/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tiger Electronics/index.html" title="Tiger Electronics">Tiger Electronics/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tiki Data/index.html" title="Tiki Data">Tiki Data/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="TimeTop/index.html" title="TimeTop">TimeTop/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Timex Sinclair/index.html" title="Timex Sinclair">Timex Sinclair/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tomy/index.html" title="Tomy">Tomy/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Toshiba/index.html" title="Toshiba">Toshiba/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Triumph-Adler/index.html" title="Triumph-Adler">Triumph-Adler/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Tsukuda Original/index.html" title="Tsukuda Original">Tsukuda Original/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="UNIVAC/index.html" title="UNIVAC">UNIVAC/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="USSR/index.html" title="USSR">USSR/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="University of Cambridge/index.html" title="University of Cambridge">University of Cambridge/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="University of Hawaii/index.html" title="University of Hawaii">University of Hawaii/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="University of Tokyo/index.html" title="University of Tokyo">University of Tokyo/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="VEB Mikroelektronik Erfurt/index.html" title="VEB Mikroelektronik Erfurt">VEB Mikroelektronik Erfurt/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="VTech/index.html" title="VTech">VTech/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Victor Technologies/index.html" title="Victor Technologies">Victor Technologies/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Videoton/index.html" title="Videoton">Videoton/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Visual Technology/index.html" title="Visual Technology">Visual Technology/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Wang/index.html" title="Wang">Wang/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Watara/index.html" title="Watara">Watara/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Xerox/index.html" title="Xerox">Xerox/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Yamaha/index.html" title="Yamaha">Yamaha/</a></td><td class="size">-</td><td class="date">-</td></tr>
+<tr><td class="link"><a href="Zilog/index.html" title="Zilog">Zilog/</a></td><td class="size">-</td><td class="date">-</td></tr>
+</tbody></table></div>
+<p style="text-align: center;">Minerva is a Myrient Clone</p>
+<footer>
+<a href="#">Non-Affiliation Disclaimer</a> | 
+<a href="#">DMCA</a>
+</footer>
+<div id="minerva-page-meta" data-section="/files/TOSEC/" data-prefix="../" style="display:none;"></div>
+<script src="../js/xregexp-all.js"></script>
+<script type="text/javascript" src="../js/search.js"></script>
+<script>
+(function () {
+  var meta = document.getElementById("minerva-page-meta");
+  if (!meta) return;
+  var section = meta.getAttribute("data-section") || "/files/";
+  var prefix = meta.getAttribute("data-prefix") || "";
+  var tbody = document.querySelector("#list tbody");
+  var uploadToggle = document.querySelector(".upload-toggle");
+  var uploadPanel = document.querySelector(".upload-panel");
+  var uploadForm = document.querySelector(".upload-form");
+  var form = document.querySelector(".newdir-form");
+  var input = document.querySelector(".newdir-input");
+  if (!tbody || !form || !input || !uploadForm) return;
+  if (uploadToggle && uploadPanel) {
+    uploadToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      uploadPanel.style.display = (uploadPanel.style.display === "none" || !uploadPanel.style.display) ? "block" : "none";
+    });
+  }
+  var key = "minerva_custom_dirs::" + section;
+  var uploadKey = "minerva_upload_items::" + section;
+  function readDirs() {
+    try {
+      var raw = localStorage.getItem(key);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveDirs(dirs) {
+    localStorage.setItem(key, JSON.stringify(dirs));
+  }
+  function readUploads() {
+    try {
+      var raw = localStorage.getItem(uploadKey);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveUploads(items) {
+    localStorage.setItem(uploadKey, JSON.stringify(items));
+  }
+  function safeName(v) {
+    return v.trim().replace(/[\\/]+/g, "").replace(/[<>:\"|?*]/g, "");
+  }
+  function nameFromUrl(url) {
+    try {
+      var clean = (url || "").split("#")[0].split("?")[0];
+      var part = clean.substring(clean.lastIndexOf("/") + 1) || "Untitled";
+      return decodeURIComponent(part);
+    } catch (e) {
+      return "Untitled";
+    }
+  }
+  function render() {
+    var old = tbody.querySelectorAll("tr.custom-dir-row, tr.custom-upload-row");
+    old.forEach(function (n) { n.remove(); });
+    var dirs = readDirs();
+    dirs.forEach(function (name) {
+      var tr = document.createElement("tr");
+      tr.className = "custom-dir-row";
+      var tdLink = document.createElement("td");
+      tdLink.className = "link";
+      var a = document.createElement("a");
+      a.href = prefix + "custom.html?path=" + encodeURIComponent(section + name + "/");
+      a.title = name + " (custom)";
+      a.textContent = name + "/";
+      tdLink.appendChild(a);
+      var tdSize = document.createElement("td");
+      tdSize.className = "size";
+      tdSize.textContent = "-";
+      var tdDate = document.createElement("td");
+      tdDate.className = "date";
+      tdDate.textContent = "Custom";
+      tr.appendChild(tdLink);
+      tr.appendChild(tdSize);
+      tr.appendChild(tdDate);
+      tbody.appendChild(tr);
+    });
+    var uploads = readUploads();
+    uploads.forEach(function (item) {
+      var tr = document.createElement("tr");
+      tr.className = "custom-upload-row";
+      var tdLink = document.createElement("td");
+      tdLink.className = "link";
+      var a = document.createElement("a");
+      a.href = item.direct_url || "#";
+      if (item.direct_url) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      a.title = item.notes || item.name || "Upload";
+      a.textContent = (item.name || "Untitled") + " [Upload]";
+      tdLink.appendChild(a);
+      var tdSize = document.createElement("td");
+      tdSize.className = "size";
+      tdSize.textContent = item.size || "-";
+      var tdDate = document.createElement("td");
+      tdDate.className = "date";
+      tdDate.textContent = item.date || "Custom";
+      tr.appendChild(tdLink);
+      tr.appendChild(tdSize);
+      tr.appendChild(tdDate);
+      tbody.appendChild(tr);
+    });
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = safeName(input.value);
+    if (!name) return;
+    var dirs = readDirs();
+    if (dirs.indexOf(name) === -1) {
+      dirs.push(name);
+      dirs.sort();
+      saveDirs(dirs);
+      render();
+    }
+    input.value = "";
+  });
+  uploadForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nameInput = uploadForm.querySelector('input[name="name"]');
+    var urlInput = uploadForm.querySelector('input[name="direct_url"]');
+    var bulkInput = uploadForm.querySelector('textarea[name="bulk_urls"]');
+    var notesInput = uploadForm.querySelector('input[name="notes"]');
+    var filesInput = uploadForm.querySelector('input[name="files"]');
+    var name = nameInput ? nameInput.value.trim() : "";
+    var directUrl = urlInput ? urlInput.value.trim() : "";
+    var bulkText = bulkInput ? bulkInput.value : "";
+    var bulkUrls = bulkText.split(/\r?\n/).map(function (x) { return x.trim(); }).filter(Boolean);
+    var notes = notesInput ? notesInput.value.trim() : "";
+    var size = "-";
+    if (filesInput && filesInput.files && filesInput.files.length > 0) {
+      size = filesInput.files.length + " file(s)";
+    }
+    var uploads = readUploads();
+    var added = false;
+    if (bulkUrls.length > 0) {
+      bulkUrls.forEach(function (u) {
+        uploads.push({
+          name: nameFromUrl(u),
+          direct_url: u,
+          notes: notes,
+          size: "-",
+          date: "Custom"
+        });
+      });
+      added = true;
+    }
+    if (name || directUrl || (filesInput && filesInput.files && filesInput.files.length > 0)) {
+      uploads.push({
+        name: name || (directUrl ? nameFromUrl(directUrl) : "Untitled"),
+        direct_url: directUrl,
+        notes: notes,
+        size: size,
+        date: "Custom"
+      });
+      added = true;
+    }
+    if (!added) return;
+    saveUploads(uploads);
+    uploadForm.reset();
+    render();
+  });
+  render();
+})();
+</script>
+</body></html>
