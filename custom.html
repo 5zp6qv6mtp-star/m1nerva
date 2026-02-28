@@ -47,6 +47,7 @@
 </p>
 <p style="margin: 0 0 8px 0;"><input type="file" name="files" multiple></p>
 <button type="submit">Submit</button>
+<p class="upload-status" style="margin: 8px 0 0 0; color: #39FF14;"></p>
 </form>
 </div>
 
@@ -225,6 +226,7 @@
   var uploadToggle = document.querySelector(".upload-toggle");
   var uploadPanel = document.querySelector(".upload-panel");
   var uploadForm = document.querySelector(".upload-form");
+  var uploadStatus = document.querySelector(".upload-status");
   if (uploadToggle && uploadPanel) {
     uploadToggle.addEventListener("click", function (e) {
       e.preventDefault();
@@ -285,11 +287,18 @@
         newItems.push(one);
         added = true;
       }
-      if (!added) return;
+      if (!added) {
+        if (uploadStatus) uploadStatus.textContent = "Nothing to add. Fill name/url or paste bulk links.";
+        return;
+      }
       saveUploads(path, uploads);
       uploadForm.reset();
       render();
-      pushUploadsToCloud(path, newItems).then(function () { syncUploadsFromCloud(path); });
+      if (uploadStatus) uploadStatus.textContent = "Added " + newItems.length + " link(s). Syncing...";
+      pushUploadsToCloud(path, newItems).then(function () {
+        if (uploadStatus) uploadStatus.textContent = "Synced " + newItems.length + " link(s).";
+        syncUploadsFromCloud(path);
+      });
     });
   }
 

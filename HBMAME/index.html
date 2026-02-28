@@ -46,6 +46,7 @@
 </p>
 <p style="margin: 0 0 8px 0;"><input type="file" name="files" multiple></p>
 <button type="submit">Submit</button>
+<p class="upload-status" style="margin: 8px 0 0 0; color: #39FF14;"></p>
 </form>
 </div>
 <div style="max-width: 900px; margin: 0 auto 14px auto; border: 1px solid #39FF14; padding: 12px;">
@@ -86,6 +87,7 @@
   var uploadToggle = document.querySelector(".upload-toggle");
   var uploadPanel = document.querySelector(".upload-panel");
   var uploadForm = document.querySelector(".upload-form");
+  var uploadStatus = document.querySelector(".upload-status");
   var form = document.querySelector(".newdir-form");
   var input = document.querySelector(".newdir-input");
   if (!tbody || !form || !input || !uploadForm) return;
@@ -205,6 +207,7 @@
   function render() {
     var old = tbody.querySelectorAll("tr.custom-dir-row, tr.custom-upload-row");
     old.forEach(function (n) { n.remove(); });
+    var insertAt = tbody.children.length > 1 ? tbody.children[1] : null;
     var dirs = readDirs();
     dirs.forEach(function (name) {
       var tr = document.createElement("tr");
@@ -225,7 +228,7 @@
       tr.appendChild(tdLink);
       tr.appendChild(tdSize);
       tr.appendChild(tdDate);
-      tbody.appendChild(tr);
+      tbody.insertBefore(tr, insertAt);
     });
     var uploads = seedUploads.concat(readUploads());
     var newItems = [];
@@ -252,7 +255,7 @@
       tr.appendChild(tdLink);
       tr.appendChild(tdSize);
       tr.appendChild(tdDate);
-      tbody.appendChild(tr);
+      tbody.insertBefore(tr, insertAt);
     });
   }
   form.addEventListener("submit", function (e) {
@@ -306,11 +309,18 @@
       newItems.push(one);
       added = true;
     }
-    if (!added) return;
+    if (!added) {
+      if (uploadStatus) uploadStatus.textContent = "Nothing to add. Fill name/url or paste bulk links.";
+      return;
+    }
     saveUploads(uploads);
     uploadForm.reset();
     render();
-    pushUploadsToCloud(newItems).then(syncUploadsFromCloud);
+    if (uploadStatus) uploadStatus.textContent = "Added " + newItems.length + " link(s). Syncing...";
+    pushUploadsToCloud(newItems).then(function () {
+      if (uploadStatus) uploadStatus.textContent = "Synced " + newItems.length + " link(s).";
+      syncUploadsFromCloud();
+    });
   });
   render();
   loadSeedUploads();
