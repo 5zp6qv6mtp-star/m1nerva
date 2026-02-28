@@ -188,12 +188,20 @@
     }
   }
   function saveUploads(items) {
-    localStorage.setItem(uploadKey, JSON.stringify(items));
+    try {
+      localStorage.setItem(uploadKey, JSON.stringify(items));
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
   async function loadSeedUploads() {
     try {
       var resp = await fetch(prefix + "data/seed-links.json", { cache: "no-store" });
-      if (!resp.ok) return;
+      if (!resp.ok) {
+        if (uploadStatus) uploadStatus.textContent = "Cloud read failed (" + resp.status + "). Showing local items.";
+        return;
+      }
       var rows = await resp.json();
       if (!Array.isArray(rows)) return;
       seedUploads = rows.filter(function (r) { return r && r.section === section; }).map(function (r) {
@@ -226,10 +234,12 @@
       });
       saveUploads(mapped);
       render();
-    } catch (e) {}
+    } catch (e) {
+      if (uploadStatus) uploadStatus.textContent = "Cloud read failed. Showing local items.";
+    }
   }
   async function pushUploadsToCloud(items) {
-    if (!cloudEnabled() || !items || items.length === 0) return;
+    if (!cloudEnabled() || !items || items.length === 0) return { ok: false, reason: "cloud-disabled" };
     try {
       var payload = items.map(function (i) {
         return {
@@ -241,12 +251,18 @@
           date: i.date || "Custom"
         };
       });
-      await fetch(cloudUrl + "/rest/v1/links", {
+      var resp = await fetch(cloudUrl + "/rest/v1/links", {
         method: "POST",
         headers: cloudHeaders({ "Content-Type": "application/json", "Prefer": "return=minimal" }),
         body: JSON.stringify(payload)
       });
-    } catch (e) {}
+      if (!resp.ok) {
+        return { ok: false, reason: "http-" + resp.status };
+      }
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, reason: "network" };
+    }
   }
   function safeName(v) {
     return v.trim().replace(/[\\/]+/g, "").replace(/[<>:\"|?*]/g, "");
@@ -369,13 +385,20 @@
       if (uploadStatus) uploadStatus.textContent = "Nothing to add. Fill name/url or paste bulk links.";
       return;
     }
-    saveUploads(uploads);
+    if (!saveUploads(uploads)) {
+      if (uploadStatus) uploadStatus.textContent = "Local save blocked by browser settings.";
+      return;
+    }
     uploadForm.reset();
     render();
     if (uploadStatus) uploadStatus.textContent = "Added " + newItems.length + " link(s). Syncing...";
-    pushUploadsToCloud(newItems).then(function () {
-      if (uploadStatus) uploadStatus.textContent = "Synced " + newItems.length + " link(s).";
-      syncUploadsFromCloud();
+    pushUploadsToCloud(newItems).then(function (result) {
+      if (result && result.ok) {
+        if (uploadStatus) uploadStatus.textContent = "Synced " + newItems.length + " link(s).";
+        syncUploadsFromCloud();
+      } else {
+        if (uploadStatus) uploadStatus.textContent = "Saved locally, but cloud sync failed.";
+      }
     });
   });
   render();

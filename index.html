@@ -148,14 +148,22 @@
     }
   }
   function saveUploads(items) {
-    localStorage.setItem(uploadKey, JSON.stringify(items));
+    try {
+      localStorage.setItem(uploadKey, JSON.stringify(items));
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
   async function syncUploadsFromCloud() {
     if (!cloudEnabled()) return;
     try {
       var url = cloudUrl + "/rest/v1/links?select=name,direct_url,notes,size,date,created_at&section=eq." + encodeURIComponent(section) + "&order=created_at.asc";
       var resp = await fetch(url, { headers: cloudHeaders() });
-      if (!resp.ok) return;
+      if (!resp.ok) {
+        if (uploadStatus) uploadStatus.textContent = "Cloud read failed (" + resp.status + "). Showing local items.";
+        return;
+      }
       var rows = await resp.json();
       var mapped = rows.map(function (r) {
         return {
@@ -168,10 +176,12 @@
       });
       saveUploads(mapped);
       render();
-    } catch (e) {}
+    } catch (e) {
+      if (uploadStatus) uploadStatus.textContent = "Cloud read failed. Showing local items.";
+    }
   }
   async function pushUploadsToCloud(items) {
-    if (!cloudEnabled() || !items || items.length === 0) return;
+    if (!cloudEnabled() || !items || items.length === 0) return { ok: false, reason: "cloud-disabled" };
     try {
       var payload = items.map(function (i) {
         return {
@@ -183,12 +193,18 @@
           date: i.date || "Custom"
         };
       });
-      await fetch(cloudUrl + "/rest/v1/links", {
+      var resp = await fetch(cloudUrl + "/rest/v1/links", {
         method: "POST",
         headers: cloudHeaders({ "Content-Type": "application/json", "Prefer": "return=minimal" }),
         body: JSON.stringify(payload)
       });
-    } catch (e) {}
+      if (!resp.ok) {
+        return { ok: false, reason: "http-" + resp.status };
+      }
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, reason: "network" };
+    }
   }
   function safeName(v) {
     return v.trim().replace(/[\/]+/g, "").replace(/[<>:"|?*]/g, "");
@@ -311,13 +327,20 @@
       if (uploadStatus) uploadStatus.textContent = "Nothing to add. Fill name/url or paste bulk links.";
       return;
     }
-    saveUploads(uploads);
+    if (!saveUploads(uploads)) {
+      if (uploadStatus) uploadStatus.textContent = "Local save blocked by browser settings.";
+      return;
+    }
     uploadForm.reset();
     render();
     if (uploadStatus) uploadStatus.textContent = "Added " + newItems.length + " link(s). Syncing...";
-    pushUploadsToCloud(newItems).then(function () {
-      if (uploadStatus) uploadStatus.textContent = "Synced " + newItems.length + " link(s).";
-      syncUploadsFromCloud();
+    pushUploadsToCloud(newItems).then(function (result) {
+      if (result && result.ok) {
+        if (uploadStatus) uploadStatus.textContent = "Synced " + newItems.length + " link(s).";
+        syncUploadsFromCloud();
+      } else {
+        if (uploadStatus) uploadStatus.textContent = "Saved locally, but cloud sync failed.";
+      }
     });
   });
   render();
